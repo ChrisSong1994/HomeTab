@@ -1,0 +1,21 @@
+{
+  "name": "OneTab",
+  "version": "0.0.1",
+  "description": "new tab page",
+  "main": "index.js",
+  "repository": "git@github.com:ChrisSong1994/OneTab.git",
+  "author": "songjun <songjun.song@antgroup.com>",
+  "license": "MIT",
+  "scripts":{
+    "build":"webpack -c ./webpack.config.js",
+    "watch":"webpack -w -c webpack.config.js"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
