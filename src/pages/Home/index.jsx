@@ -1,12 +1,11 @@
 import React from "react";
+import { Button } from "antd";
+import styles from "./index.less";
 
 function Home() {
   return (
-    <div className="App">
+    <div className={styles["wrap"]}>
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -15,6 +14,7 @@ function Home() {
         >
           Learn React
         </a>
+        <Button type="primary">按钮</Button>
       </header>
     </div>
   );
