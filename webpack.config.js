@@ -71,6 +71,14 @@ module.exports = (_env, options) => {
             },
           ],
         },
+        {
+          test: /\.(svg|png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: "file-loader",
+            },
+          ],
+        },
       ],
     },
     plugins: [
