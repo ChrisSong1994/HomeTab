@@ -1,4 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
+
 const path = require("path");
 
 module.exports = (_env, options) => {
@@ -6,6 +8,7 @@ module.exports = (_env, options) => {
   const runInDev = mode === "development";
 
   return {
+    target: "web",
     entry: {
       home: "./src/home.js",
       popup: "./src/popup.js",
@@ -13,10 +16,11 @@ module.exports = (_env, options) => {
     output: {
       path: path.resolve(__dirname, "./dist"),
       filename: "[name].[contenthash].bundle.js",
+      clean: true,
     },
     resolve: {
       alias: {
-        "@": "./src",
+        "@": path.resolve(__dirname, "src"),
       },
       extensions: [".js", ".jsx", ".json"],
     },
@@ -62,11 +66,12 @@ module.exports = (_env, options) => {
                   [
                     "@babel/preset-env",
                     {
-                      targets: "defaults",
+                      modules: false,
                     },
                   ],
                   "@babel/preset-react",
                 ],
+                plugins: ["@umijs/babel-plugin-auto-css-modules"],  // 开启css modules  自动识别
               },
             },
           ],
@@ -82,6 +87,14 @@ module.exports = (_env, options) => {
       ],
     },
     plugins: [
+      new CopyPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, "manifest.json"),
+            to: path.resolve(__dirname, "dist/manifest.json"),
+          },
+        ],
+      }),
       new HtmlWebpackPlugin({
         title: "主页",
         chunks: ["home"],

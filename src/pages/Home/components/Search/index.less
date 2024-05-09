@@ -1,7 +1,7 @@
 .search-wrapper {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 18vh;
 
   .search {
     width: 720px;
@@ -19,24 +19,18 @@
     position: relative;
     cursor: pointer;
 
-    .search-engin-logo {
-      width: 28px;
-      height: 28px;
-    }
-
     .search-engin-active {
       position: absolute;
       font-size: 14px;
       right: 2px;
       bottom: 2px;
-      color: #8c8c8c;
+      color: #a9a8a8;
       transform: rotate(45deg);
-      visibility: hidden;
     }
 
     &:hover {
       .search-engin-active {
-        visibility: visible;
+        color: #8c8c8c;
       }
     }
   }
@@ -70,5 +64,11 @@
     line-height: 46px;
     text-align: center;
     color: #fff;
+    transform: translateX(1px);
   }
+}
+
+.search-type-logo {
+  width: 24px;
+  height: 24px;
 }
