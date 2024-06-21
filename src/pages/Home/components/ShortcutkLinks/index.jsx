@@ -6,6 +6,8 @@ import StoreInstance from "@/store";
 import { to } from "@/utils";
 import styles from "./index.less";
 
+const CHROME_FAVION_PREFIX = "http://www.google.com/s2/favicons?domain=";  // chrome 获取 favicon 接口
+
 const ShortcutkLinks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [links, setLinks] = useState(
@@ -27,7 +29,7 @@ const ShortcutkLinks = () => {
         {
           title: res.title,
           link: res.link,
-          icon: "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png",
+          icon: `${CHROME_FAVION_PREFIX}${res.link}`,
         },
       ];
       StoreInstance.setData({
@@ -71,16 +73,12 @@ const ShortcutkLinks = () => {
       </div>
       <Modal
         title="添加快捷方式"
-        centered
         open={isModalOpen}
         closable={false}
         onOk={handleOk}
         onCancel={handleCancel}
         okText="确定"
         cancelText="取消"
-        style={{
-          paddingTop: "20px",
-        }}
       >
         <Form
           form={form}
