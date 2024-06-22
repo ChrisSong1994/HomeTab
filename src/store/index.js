@@ -11,11 +11,14 @@ const DEFAULT_STORE = {
   // 快捷链接配置
   shortcutLinks: [
     {
+      id: 1,
       title: "npm",
       link: "https://www.npmjs.com/",
-      icon: "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png",
+      icon:
+        "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png",
     },
     {
+      id: 2,
       title: "github",
       link: "https://github.com/",
       icon: "https://github.com/fluidicon.png",

@@ -1,11 +1,12 @@
 .shortcutlinks {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 20px auto;
   overflow: hidden;
   padding: 2px;
   transition: opacity 0.3s ease-in-out;
+  width: 800px;
 
   .shortcutlinks-item {
     -webkit-tap-highlight-color: transparent;
@@ -25,11 +26,6 @@
     user-select: none;
     width: 112px;
     height: 112px;
-
-    &:hover {
-      opacity: 0.8;
-      background-color: rgba(255, 255, 255, 0.1);
-    }
 
     .shortcutlinks-item-link {
       border-radius: 4px;
@@ -75,6 +71,38 @@
           0px 0px 2px rgba(0, 0, 0, 0.2), 0px 0px 10px rgba(0, 0, 0, 0.1);
         white-space: nowrap;
         width: 100%;
+      }
+    }
+
+    .shortcutlinks-item-option {
+      position: absolute;
+      color: #ffffff;
+      top: 4px;
+      right: 4px;
+      transition: all 0.1s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      border-radius: 50%;
+      span {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    &:hover {
+      opacity: 0.8;
+      background-color: rgba(255, 255, 255, 0.1);
+      .shortcutlinks-item-option {
+        opacity: 1;
       }
     }
   }

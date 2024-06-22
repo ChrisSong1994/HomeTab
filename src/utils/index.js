@@ -10,12 +10,14 @@ export function to(promise) {
   });
 }
 
+// 生成id
+export function generateId() {
+  return Date.now();
+}
 
 /**
  * 获取页面的icon
-*/
-export async function getDocumentIconByUrl(url){
-
-return null
-
+ */
+export async function getDocumentIconByUrl(url) {
+  return null;
 }
