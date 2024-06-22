@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "name": "home-tab",
+  "permissions": ["bookmarks","storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "home tab"
+  },
+  "chrome_url_overrides": {
+    "newtab": "home.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

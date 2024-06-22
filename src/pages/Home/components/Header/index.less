@@ -1,0 +1,35 @@
+.header {
+  height: 48px;
+  padding: 8px;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  box-sizing: border-box;
+
+  .options {
+    display: flex;
+
+    .icon {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+
+      &:hover {
+        background-color: rgba(232, 234, 237, 0.08);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        fill: #fff;
+      }
+    }
+  }
+}

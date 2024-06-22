@@ -1,0 +1,109 @@
+.shortcutlinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 20px auto;
+  overflow: hidden;
+  padding: 2px;
+  transition: opacity 0.3s ease-in-out;
+  width: 800px;
+
+  .shortcutlinks-item {
+    -webkit-tap-highlight-color: transparent;
+    align-items: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    outline: 0;
+    position: relative;
+    text-decoration: none;
+    transition-duration: 0.3s;
+    transition-property: left, top;
+    transition-timing-function: ease-in-out;
+    user-select: none;
+    width: 112px;
+    height: 112px;
+
+    .shortcutlinks-item-link {
+      border-radius: 4px;
+      display: inline-block;
+      height: 100%;
+      outline: 0;
+      position: absolute;
+      touch-action: none;
+      width: 100%;
+    }
+    .shortcutlinks-item-icon {
+      align-items: center;
+      background-color: rgba(225, 227, 225, 1);
+      border-radius: 50%;
+      display: flex;
+      flex-shrink: 0;
+      height: 48px;
+      justify-content: center;
+      margin-top: 16px;
+      width: 48px;
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .shortcutlinks-item-title {
+      align-items: center;
+      color: rgba(248, 249, 250, 1);
+      display: flex;
+      height: 32px;
+      line-height: 16px;
+      margin-top: 6px;
+      padding: 2px 8px;
+      width: 88px;
+      span {
+        font-size: 14px;
+        font-weight: 400;
+        overflow: hidden;
+        text-align: center;
+        text-overflow: ellipsis;
+        text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.5),
+          0px 0px 2px rgba(0, 0, 0, 0.2), 0px 0px 10px rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+        width: 100%;
+      }
+    }
+
+    .shortcutlinks-item-option {
+      position: absolute;
+      color: #ffffff;
+      top: 4px;
+      right: 4px;
+      transition: all 0.1s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      border-radius: 50%;
+      span {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    &:hover {
+      opacity: 0.8;
+      background-color: rgba(255, 255, 255, 0.1);
+      .shortcutlinks-item-option {
+        opacity: 1;
+      }
+    }
+  }
+}
