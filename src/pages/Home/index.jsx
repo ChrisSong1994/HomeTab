@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Header from "./components/Header";
 import Search from "./components/Search";
 import Setting from "./components/Setting";
 import ShortcutkLinks from "./components/ShortcutkLinks";
-import THEME_BG from "@/assets/images/theme_bg.png";
-import StoreInstance from "@/store";
+import StoreInstance, { DEFAULT_STORE } from "@/store";
 import styles from "./index.less";
 
 function Home() {
-  const backgroundImage = StoreInstance.getData().backgroundUrl;
-
+  const backgroundImage =
+    StoreInstance.getData().backgroundUrl || DEFAULT_STORE.backgroundUrl;
   return (
     <div
       className={styles["layout"]}

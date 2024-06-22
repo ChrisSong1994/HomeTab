@@ -3,7 +3,7 @@
  */
 
 const STORE_ID = "__chrome_plugin_home_tab_store__";
-const DEFAULT_STORE = {
+export const DEFAULT_STORE = {
   // 搜索引擎
   searchEngine: "Google",
   // 背景图片配置
@@ -39,7 +39,6 @@ class Store {
     if (this.isRunInChromePlugin) {
       // 先查找本地存储
       chrome.storage.local.get(STORE_ID, (data) => {
-        console.log("storage data", data);
         if (data?.[STORE_ID]) {
           this.store = data[STORE_ID];
         } else {

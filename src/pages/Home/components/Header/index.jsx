@@ -6,7 +6,7 @@ import styles from "./index.less";
 function Header() {
   return (
     <header className={styles["header"]}>
-      <div className={styles.options}>
+      {/* <div className={styles.options}>
         <Popover
           title="工具集"
           arrow={false}
@@ -20,7 +20,7 @@ function Header() {
             </svg>
           </div>
         </Popover>
-      </div>
+      </div> */}
     </header>
   );
 }
