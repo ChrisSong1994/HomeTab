@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { EditFilled, CloseOutlined } from "@ant-design/icons";
 import { FloatButton, Drawer } from "antd";
 
+import BgImages from "./BgImages";
+
 const Setting = () => {
   const [open, setOpen] = useState(false);
 
@@ -27,7 +29,7 @@ const Setting = () => {
         open={open}
         extra={<CloseOutlined onClick={handleClose} />}
       >
-        设置
+        <BgImages />
       </Drawer>
     </div>
   );

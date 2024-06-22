@@ -58,7 +58,7 @@ class Store {
   }
 
   getData() {
-    return this.store;
+    return { ...this.store };
   }
 
   setData(data) {
@@ -66,6 +66,7 @@ class Store {
     this.store = newData;
     if (this.isRunInChromePlugin) {
       chrome.storage.local.set({ [STORE_ID]: newData });
+      chrome.storage.sync.set(STORE_ID, newData);
     }
   }
 }
