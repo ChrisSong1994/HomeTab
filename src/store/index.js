@@ -7,7 +7,7 @@ const DEFAULT_STORE = {
   // 搜索引擎
   searchEngine: "Google",
   // 背景图片配置
-  backgroundUrl: "",
+  backgroundUrl: "/public/images/default_theme_bg.png",
   // 快捷链接配置
   shortcutLinks: [
     {

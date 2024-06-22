@@ -71,7 +71,7 @@ module.exports = (_env, options) => {
                   ],
                   "@babel/preset-react",
                 ],
-                plugins: ["@umijs/babel-plugin-auto-css-modules"],  // 开启css modules  自动识别
+                plugins: ["@umijs/babel-plugin-auto-css-modules"], // 开启css modules  自动识别
               },
             },
           ],
@@ -92,6 +92,10 @@ module.exports = (_env, options) => {
           {
             from: path.resolve(__dirname, "manifest.json"),
             to: path.resolve(__dirname, "dist/manifest.json"),
+          },
+          {
+            from: path.resolve(__dirname, "public/**/*"),
+            to: path.resolve(__dirname, "dist"),
           },
         ],
       }),

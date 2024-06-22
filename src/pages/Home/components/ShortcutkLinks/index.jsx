@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Form, Input, Dropdown } from "antd";
 import { PlusOutlined, MoreOutlined } from "@ant-design/icons";
-import StoreInstance from "@/store";
 
+import StoreInstance from "@/store";
 import { to, generateId } from "@/utils";
 import styles from "./index.less";
 
