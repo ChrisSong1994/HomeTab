@@ -24,6 +24,8 @@ export const DEFAULT_STORE = {
       icon: "https://github.com/fluidicon.png",
     },
   ],
+  // 快捷键点击跳转方式  _self | _blank
+  shortcutLinkTarget: "_self",
   // 插件设置
   setting: {},
 };

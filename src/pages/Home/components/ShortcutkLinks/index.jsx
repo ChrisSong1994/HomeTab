@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Form, Input, Dropdown } from "antd";
 import { PlusOutlined, MoreOutlined } from "@ant-design/icons";
 
-import StoreInstance from "@/store";
+import { useStore } from "@/hooks";
 import { to, generateId } from "@/utils";
 import styles from "./index.less";
 
@@ -20,9 +20,7 @@ const OPTIONS_MENUS = [
 
 const ShortcutkLinks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [links, setLinks] = useState(
-    StoreInstance.getData().shortcutLinks || []
-  );
+  const [store, setStore] = useStore();
   const [form] = Form.useForm();
 
   const handleCancel = () => {
@@ -36,7 +34,7 @@ const ShortcutkLinks = () => {
     let newLinks;
     // 编辑
     if (res.id) {
-      newLinks = links.map((item) => {
+      newLinks = store.shortcutLinks.map((item) => {
         if (res.id === item.id) {
           return {
             ...res,
@@ -48,7 +46,7 @@ const ShortcutkLinks = () => {
     } else {
       // 新增
       newLinks = [
-        ...links,
+        ...store.shortcutLinks,
         {
           id: generateId(),
           title: res.title,
@@ -57,26 +55,20 @@ const ShortcutkLinks = () => {
         },
       ];
     }
-    setLinks(() => {
-      StoreInstance.setData({
-        shortcutLinks: newLinks,
-      });
-      return newLinks;
+
+    setStore({
+      shortcutLinks: newLinks,
     });
     handleCancel();
   };
 
   // 移除
   const handleRemove = (link) => {
-    const newLinks = links.filter((item) => {
+    const newLinks = store.shortcutLinks.filter((item) => {
       return link.id !== item.id;
     });
-    setLinks(() => {
-      StoreInstance.setData({
-        shortcutLinks: newLinks,
-      });
-      return newLinks;
-    });
+
+    setStore({ shortcutLinks: newLinks });
   };
 
   // 编辑
@@ -97,13 +89,13 @@ const ShortcutkLinks = () => {
 
   return (
     <div className={styles["shortcutlinks"]}>
-      {links.map((item, index) => {
+      {store.shortcutLinks.map((item, index) => {
         return (
           <div key={item.id || index} className={styles["shortcutlinks-item"]}>
             <a
               className={styles["shortcutlinks-item-link"]}
               href={item.link}
-              target="_blank"
+              target={store.shortcutLinkTarget}
               rel="noreferrer"
             />
             <div className={styles["shortcutlinks-item-icon"]}>
