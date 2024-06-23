@@ -24,10 +24,10 @@ const Setting = () => {
     Event.emit("STORE_BG_CHANGE", url);
   };
 
-  // const handleShortcutLinkTarget = (target) => {
-  //   setStore({ shortcutLinkTarget: target });
-  //   Event.emit("STORE_LINK_TARGET_CHANGE", target);
-  // };
+  const handleShortcutLinkTarget = (target) => {
+    setStore({ shortcutLinkTarget: target });
+    Event.emit("STORE_LINK_TARGET_CHANGE", target);
+  };
 
   return (
     <div>
@@ -47,7 +47,7 @@ const Setting = () => {
         open={open}
         extra={<CloseOutlined onClick={handleClose} />}
       >
-        {/* <Form.Item label="快捷连接打开方式">
+        <Form.Item label="快捷连接打开方式">
           <Segmented
             options={[
               { label: "该窗口", value: "_self" },
@@ -56,26 +56,27 @@ const Setting = () => {
             value={store.shortcutLinkTarget}
             onChange={handleShortcutLinkTarget}
           />
-        </Form.Item> */}
-
-        <div className={styles["setting-bg-images"]}>
-          {THEME_BG_LIST.map((item) => {
-            return (
-              <div
-                className={styles["setting-bg-images-item"]}
-                key={item.url}
-                style={{ backgroundImage: `url(${item.url})` }}
-                onClick={() => handleCheckBgImage(item.url)}
-              >
-                {store.backgroundUrl === item.url ? (
-                  <div className={styles["setting-bg-images-item-checked"]}>
-                    <CheckCircleFilled />
-                  </div>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
+        </Form.Item>
+        <Form.Item label="切换背景图">
+          <div className={styles["setting-bg-images"]}>
+            {THEME_BG_LIST.map((item) => {
+              return (
+                <div
+                  className={styles["setting-bg-images-item"]}
+                  key={item.url}
+                  style={{ backgroundImage: `url(${item.url})` }}
+                  onClick={() => handleCheckBgImage(item.url)}
+                >
+                  {store.backgroundUrl === item.url ? (
+                    <div className={styles["setting-bg-images-item-checked"]}>
+                      <CheckCircleFilled />
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        </Form.Item>
       </Drawer>
     </div>
   );

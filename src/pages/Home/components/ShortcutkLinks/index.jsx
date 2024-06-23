@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Form, Input, Dropdown } from "antd";
 import { PlusOutlined, MoreOutlined } from "@ant-design/icons";
 
+import Event from "@/utils/event";
+import StoreInstance from "@/store";
 import { useStore } from "@/hooks";
 import { to, generateId } from "@/utils";
 import styles from "./index.less";
@@ -21,6 +23,7 @@ const OPTIONS_MENUS = [
 const ShortcutkLinks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [store, setStore] = useStore();
+  const [target, setTarget] = useState(StoreInstance.shortcutLinkTarget);
   const [form] = Form.useForm();
 
   const handleCancel = () => {
@@ -87,6 +90,12 @@ const ShortcutkLinks = () => {
     }
   };
 
+  useEffect(() => {
+    Event.on("STORE_LINK_TARGET_CHANGE", (v) => {
+      setTarget(v);
+    });
+  }, []);
+
   return (
     <div className={styles["shortcutlinks"]}>
       {store.shortcutLinks.map((item, index) => {
@@ -95,7 +104,7 @@ const ShortcutkLinks = () => {
             <a
               className={styles["shortcutlinks-item-link"]}
               href={item.link}
-              target={store.shortcutLinkTarget}
+              target={target}
               rel="noreferrer"
             />
             <div className={styles["shortcutlinks-item-icon"]}>
