@@ -7,10 +7,11 @@ export const googleSearchSuggestParse = (res) => {
   if (result.length) {
     const list = result[0];
     return list.map((item) => {
+      const keyword = item[0];
       return {
-        keyword: item[0],
+        keyword: keyword,
         icon: item?.[3]?.zs,
-        link: null,
+        link: `https://www.google.com/search?q=${keyword}`,
       };
     });
   }
@@ -20,10 +21,11 @@ export const googleSearchSuggestParse = (res) => {
 export const baiduSearchSuggestParse = (res) => {
   const result = res?.g || [];
   return result.map((item) => {
+    const keyword = item.q;
     return {
-      keyword: item.q,
+      keyword: keyword,
       icon: null,
-      link: null,
+      link: `https://www.baidu.com/s?wd=${keyword}`,
     };
   });
 };
@@ -31,8 +33,9 @@ export const baiduSearchSuggestParse = (res) => {
 export const bingSearchSuggestParse = (res) => {
   const result = res?.s || [];
   return result.map((item) => {
+    const keyword = item.q.replaceAll("", "").replaceAll("", "");
     return {
-      keyword: item.q.replaceAll("", "").replaceAll("", ""),
+      keyword: keyword,
       icon: null,
       link: `https://cn.bing.com${item.u}`,
     };
