@@ -19,6 +19,8 @@ export const SEARCH_ENGINES = [
     logo: <img className={styles["search-type-logo"]} src={GOOGLE_LOGO} />,
     searchUrl:
       "https://www.google.com/search?q=${keyword}&oq=${keyword}&sourceid=chrome&ie=utf-8",
+    suggestUrl:
+      "https://www.google.com.hk/complete/search?hl=zh-CN&q=${keyword}&client=gws-wiz&start=0",
   },
   {
     key: "Baidu",
@@ -26,6 +28,7 @@ export const SEARCH_ENGINES = [
     icon: <img className={styles["search-type-icon"]} src={BAIDU_ICON} />,
     logo: <img className={styles["search-type-logo"]} src={BAIDU_LOGO} />,
     searchUrl: "https://www.baidu.com/s?wd=${keyword}&tn=baidu&ie=utf-8",
+    suggestUrl: "https://www.baidu.com/sugrec?wd=${keyword}&prod=pc",
   },
   {
     key: "Bing",
@@ -34,6 +37,8 @@ export const SEARCH_ENGINES = [
     logo: <img className={styles["search-type-logo"]} src={BING_LOGO} />,
     searchUrl:
       "https://cn.bing.com/search?q=${keyword}&pq=${keyword}&from=form",
+    suggestUrl:
+      "https://cn.bing.com/AS/Suggestions?mkt=zh-CN&qry=${keyword}&pt=page.home&cp=2&msbqf=false&cvid=0FC838E6721A4D97B5C9894034C93D12",
   },
 ];
 
