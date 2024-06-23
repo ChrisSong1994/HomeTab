@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "webpack serve --mode development --progress",
     "build": "webpack --mode production --progress",
-    "build:datch": "webpack --mode production --progress --watch"
+    "build:watch": "webpack --mode production --progress --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.22.20",
