@@ -3,11 +3,11 @@
  */
 
 const STORE_ID = "__chrome_plugin_home_tab_store__";
-const DEFAULT_STORE = {
+export const DEFAULT_STORE = {
   // 搜索引擎
   searchEngine: "Google",
   // 背景图片配置
-  backgroundUrl: "",
+  backgroundUrl: "/public/images/default_theme_bg.png",
   // 快捷链接配置
   shortcutLinks: [
     {
@@ -24,6 +24,8 @@ const DEFAULT_STORE = {
       icon: "https://github.com/fluidicon.png",
     },
   ],
+  // 快捷键点击跳转方式  _self | _blank
+  shortcutLinkTarget: "_self",
   // 插件设置
   setting: {},
 };
@@ -39,7 +41,6 @@ class Store {
     if (this.isRunInChromePlugin) {
       // 先查找本地存储
       chrome.storage.local.get(STORE_ID, (data) => {
-        console.log("storage data", data);
         if (data?.[STORE_ID]) {
           this.store = data[STORE_ID];
         } else {
@@ -59,7 +60,7 @@ class Store {
   }
 
   getData() {
-    return this.store;
+    return { ...this.store };
   }
 
   setData(data) {
@@ -67,6 +68,7 @@ class Store {
     this.store = newData;
     if (this.isRunInChromePlugin) {
       chrome.storage.local.set({ [STORE_ID]: newData });
+      chrome.storage.sync.set({ [STORE_ID]: newData });
     }
   }
 }
