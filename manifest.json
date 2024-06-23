@@ -8,10 +8,6 @@
     "48": "/public/icons/48.png",
     "128": "/public/icons/128.png"
   },
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "home tab"
-  },
   "chrome_url_overrides": {
     "newtab": "home.html"
   },
