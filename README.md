@@ -1,5 +1,6 @@
 # OneTab
 一个chrome 插件，帮助用户建立更好的新标签页
+![插件截图](./snapshot/截图.jpg)
 
 ## 开发
 ```bash
