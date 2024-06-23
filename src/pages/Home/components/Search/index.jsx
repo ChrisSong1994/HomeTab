@@ -80,7 +80,7 @@ const Search = () => {
 
   return (
     <div className={styles["search-wrapper"]}>
-      <div className={styles["search-logo"]}>{searchEngineInfo.logo}</div>
+      {searchEngineInfo.logo}
       <div className={styles["search"]}>
         <Dropdown
           menu={{
@@ -111,6 +111,7 @@ const Search = () => {
         <div className={styles["search-btn"]} onClick={handleSearch}>
           <SearchOutlined />
         </div>
+        <div className={styles["search-suggest-list"]}> </div>
       </div>
     </div>
   );
