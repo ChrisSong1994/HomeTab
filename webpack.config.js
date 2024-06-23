@@ -11,7 +11,6 @@ module.exports = (_env, options) => {
     target: "web",
     entry: {
       home: "./src/home.js",
-      popup: "./src/popup.js",
     },
     output: {
       path: path.resolve(__dirname, "./dist"),
@@ -104,13 +103,7 @@ module.exports = (_env, options) => {
         chunks: ["home"],
         filename: "home.html",
         template: "./src/assets/home.html",
-      }),
-      new HtmlWebpackPlugin({
-        title: "popup页",
-        chunks: ["popup"],
-        filename: "popup.html",
-        template: "./src/assets/popup.html",
-      }),
+      })
     ],
   };
 };

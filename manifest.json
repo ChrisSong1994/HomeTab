@@ -3,14 +3,14 @@
   "manifest_version": 3,
   "name": "home-tab",
   "permissions": ["bookmarks", "storage"],
+  "background": {
+    "service_worker": "/public/service_worker.js"
+  },
+  "host_permissions": ["*://*/*"],
   "icons": {
     "16": "/public/icons/16.png",
     "48": "/public/icons/48.png",
     "128": "/public/icons/128.png"
-  },
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "home tab"
   },
   "chrome_url_overrides": {
     "newtab": "home.html"

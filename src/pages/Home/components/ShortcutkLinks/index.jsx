@@ -23,7 +23,9 @@ const OPTIONS_MENUS = [
 const ShortcutkLinks = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [store, setStore] = useStore();
-  const [target, setTarget] = useState(StoreInstance.shortcutLinkTarget);
+  const [target, setTarget] = useState(
+    StoreInstance.getData().shortcutLinkTarget
+  );
   const [form] = Form.useForm();
 
   const handleCancel = () => {
