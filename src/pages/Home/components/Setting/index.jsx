@@ -6,7 +6,6 @@ import {
 } from "@ant-design/icons";
 import { FloatButton, Drawer, Form, Segmented } from "antd";
 
-import Event from "@/utils/event";
 import { useStore } from "@/hooks";
 import { THEME_BG_LIST } from "@/constants";
 import styles from "./index.less";
@@ -21,12 +20,10 @@ const Setting = () => {
 
   const handleCheckBgImage = (url) => {
     setStore({ backgroundUrl: url });
-    Event.emit("STORE_BG_CHANGE", url);
   };
 
   const handleShortcutLinkTarget = (target) => {
     setStore({ shortcutLinkTarget: target });
-    Event.emit("STORE_LINK_TARGET_CHANGE", target);
   };
 
   return (
