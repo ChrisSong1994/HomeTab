@@ -121,6 +121,11 @@ const Search = () => {
       {searchEngineInfo.logo}
       <Popover
         style={{ width: 500 }}
+        trigger="click"
+        title={null}
+        arrow={false}
+        placement="bottom"
+        open={isSuggestShow}
         content={
           <div className={styles["search-suggest-list"]}>
             {suggestList.map((item, index) => {
@@ -142,10 +147,6 @@ const Search = () => {
             })}
           </div>
         }
-        title={null}
-        arrow={false}
-        placement="bottom"
-        open={isSuggestShow}
       >
         <div className={styles["search"]}>
           <Dropdown
