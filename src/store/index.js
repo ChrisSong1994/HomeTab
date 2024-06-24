@@ -34,18 +34,19 @@ class Store {
   constructor() {
     this.store = DEFAULT_STORE;
     this.isRunInChromePlugin = chrome?.runtime !== undefined;
-    this.observerStack = []; 
+    this.observerStack = [];
     this.init();
   }
 
   init() {
+    this.store = DEFAULT_STORE;
     if (this.isRunInChromePlugin) {
       // 先查找本地存储
       chrome.storage.local.get(STORE_ID, (data) => {
         if (data?.[STORE_ID]) {
           this.store = data[STORE_ID];
+          this.subscribe(this.getData());
         } else {
-          this.store = DEFAULT_STORE;
           chrome.storage.local.set({ [STORE_ID]: DEFAULT_STORE });
         }
       });
@@ -53,10 +54,9 @@ class Store {
       chrome.storage.sync.get(STORE_ID, (data) => {
         if (data[STORE_ID]) {
           this.store = data[STORE_ID];
+          this.subscribe(this.getData());
         }
       });
-    } else {
-      this.store = DEFAULT_STORE;
     }
   }
 
