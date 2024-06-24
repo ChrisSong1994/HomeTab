@@ -34,6 +34,7 @@ class Store {
   constructor() {
     this.store = DEFAULT_STORE;
     this.isRunInChromePlugin = chrome?.runtime !== undefined;
+    this.observerStack = []; 
     this.init();
   }
 
@@ -49,9 +50,9 @@ class Store {
         }
       });
       // 查看远程，有数据会进行同步
-      chrome.storage.sync.get(STORE_ID, (result) => {
-        if (result[STORE_ID]) {
-          this.store = result[STORE_ID];
+      chrome.storage.sync.get(STORE_ID, (data) => {
+        if (data[STORE_ID]) {
+          this.store = data[STORE_ID];
         }
       });
     } else {
@@ -66,9 +67,22 @@ class Store {
   setData(data) {
     const newData = { ...this.store, ...data };
     this.store = newData;
+    this.subscribe(newData);
     if (this.isRunInChromePlugin) {
       chrome.storage.local.set({ [STORE_ID]: newData });
       chrome.storage.sync.set({ [STORE_ID]: newData });
+    }
+  }
+
+  onSubscribe(observer) {
+    this.observerStack.push(observer);
+  }
+
+  subscribe(data) {
+    if (this.observerStack.length) {
+      this.observerStack.map((observer) => {
+        observer(data);
+      });
     }
   }
 }
