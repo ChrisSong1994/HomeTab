@@ -88,6 +88,11 @@ const ShortcutkLinks = () => {
     }
   };
 
+  // 排序
+  // const handleSortChange = (newLinks) => {
+  //   setStore({ shortcutLinks: newLinks });
+  // };
+
   return (
     <div className={styles["shortcutlinks"]}>
       {store.shortcutLinks.map((item, index) => {
@@ -107,7 +112,10 @@ const ShortcutkLinks = () => {
             </div>
             <div className={styles["shortcutlinks-item-option"]}>
               <Dropdown
-                menu={{ items: OPTIONS_MENUS, onClick: handleMenuClick(item) }}
+                menu={{
+                  items: OPTIONS_MENUS,
+                  onClick: handleMenuClick(item),
+                }}
                 placement="bottomRight"
               >
                 <MoreOutlined />
@@ -116,6 +124,7 @@ const ShortcutkLinks = () => {
           </div>
         );
       })}
+
       <div
         className={styles["shortcutlinks-item"]}
         onClick={() => setIsModalOpen(true)}
@@ -127,6 +136,7 @@ const ShortcutkLinks = () => {
           <span>添加快捷方式</span>
         </div>
       </div>
+
       <Modal
         title="添加快捷方式"
         open={isModalOpen}
