@@ -64,7 +64,7 @@ const Search = () => {
   };
 
   const handleSearchBlur = () => {
-    setSuggestShow(false);
+    setTimeout(() => setSuggestShow(false), 100);
   };
 
   const handleSearch = (event) => {
