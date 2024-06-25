@@ -62,7 +62,6 @@ export const bingSearchSuggestParse = (res, searchKeyword) => {
   const result = res?.s || [];
   const data = result.map((item) => {
     const keyword = item.q.replaceAll("", "").replaceAll("", "");
-    console.log(item);
     return {
       keyword: keyword,
       icon: null,
