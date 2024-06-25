@@ -1,21 +1,21 @@
 /**
  * 定义数据存储格式，优先存在本地，在用户登录时同步到用户云端
  */
+import { THEME_BG_LIST } from "@/constants";
 
 const STORE_ID = "__chrome_plugin_home_tab_store__";
 export const DEFAULT_STORE = {
   // 搜索引擎
   searchEngine: "Google",
   // 背景图片配置
-  backgroundUrl: "/public/images/default_theme_bg.png",
+  backgroundUrl: THEME_BG_LIST[0].url,
   // 快捷链接配置
   shortcutLinks: [
     {
       id: 1,
-      title: "npm",
-      link: "https://www.npmjs.com/",
-      icon:
-        "https://static-production.npmjs.com/58a19602036db1daee0d7863c94673a4.png",
+      title: "youtube",
+      link: "https://www.youtube.com/",
+      icon: "https://www.youtube.com/favicon.ico",
     },
     {
       id: 2,

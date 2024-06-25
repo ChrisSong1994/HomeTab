@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Modal, Form, Input, Dropdown } from "antd";
 import { PlusOutlined, MoreOutlined } from "@ant-design/icons";
 
+import LinkImage from "./LinkImage";
 import { useStore } from "@/hooks";
 import { to, generateId } from "@/utils";
 import styles from "./index.less";
@@ -99,7 +100,8 @@ const ShortcutkLinks = () => {
               rel="noreferrer"
             />
             <div className={styles["shortcutlinks-item-icon"]}>
-              <img src={item.icon} alt={item.title} />
+              <LinkImage link={item} />
+              {/* <img src={item.icon} alt={item.title} /> */}
             </div>
             <div className={styles["shortcutlinks-item-title"]}>
               <span>{item.title}</span>

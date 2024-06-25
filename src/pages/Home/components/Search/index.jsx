@@ -2,7 +2,7 @@ import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { Dropdown, Popover } from "antd";
 import { CaretRightOutlined, SearchOutlined } from "@ant-design/icons";
 
-import { searchSuggestParse } from "@/utils/search";
+import { searchSuggestParse } from "@/utils";
 import { useStore } from "@/hooks";
 import SuggestList from "./SuggestList";
 import GOOGLE_ICON from "@/assets/images/google_icon.png";
