@@ -101,7 +101,6 @@ const ShortcutkLinks = () => {
             />
             <div className={styles["shortcutlinks-item-icon"]}>
               <LinkImage link={item} />
-              {/* <img src={item.icon} alt={item.title} /> */}
             </div>
             <div className={styles["shortcutlinks-item-title"]}>
               <span>{item.title}</span>
@@ -122,7 +121,7 @@ const ShortcutkLinks = () => {
         onClick={() => setIsModalOpen(true)}
       >
         <div className={styles["shortcutlinks-item-icon"]}>
-          <PlusOutlined />
+          <PlusOutlined style={{ fontSize: 18 }} />
         </div>
         <div className={styles["shortcutlinks-item-title"]}>
           <span>添加快捷方式</span>
