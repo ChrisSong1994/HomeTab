@@ -113,7 +113,7 @@ const Search = () => {
 
   useLayoutEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus();
+      setTimeout(()=>inputRef.current.focus(),100)
       inputRef.current.addEventListener("keydown", handleSearch);
     }
     handleInputChange();
@@ -123,8 +123,6 @@ const Search = () => {
     };
   }, [searchEngineInfo]);
 
-  // 监听快捷键
-  useEffect(() => {}, []);
 
   return (
     <div className={styles["search-wrapper"]}>
