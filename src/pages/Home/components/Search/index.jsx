@@ -1,10 +1,6 @@
 import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { Dropdown, Popover } from "antd";
-import {
-  CaretRightOutlined,
-  SearchOutlined,
-  EnterOutlined,
-} from "@ant-design/icons";
+import { CaretRightOutlined, SearchOutlined } from "@ant-design/icons";
 
 import { searchSuggestParse } from "@/utils/search";
 import { useStore } from "@/hooks";
@@ -68,7 +64,7 @@ const Search = () => {
   };
 
   const handleSearchBlur = () => {
-    setTimeout(() => setSuggestShow(false), 100);
+    setSuggestShow(false);
   };
 
   const handleSearch = (event) => {
@@ -87,7 +83,6 @@ const Search = () => {
     const queryKeyword = encodeURIComponent(keyword);
 
     if (chrome?.runtime !== undefined && keyword) {
-      console.log('sendMessage')
       chrome.runtime.sendMessage(
         {
           type: "SEARCH_SUGGEST_FETCH",
@@ -106,7 +101,6 @@ const Search = () => {
             result,
             keyword
           );
-          console.log("searchSuggestData", searchSuggestData);
           if (searchSuggestData.length >= 1) {
             setSuggestList(searchSuggestData);
           } else {
