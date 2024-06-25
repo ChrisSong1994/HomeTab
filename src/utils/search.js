@@ -1,4 +1,4 @@
-export const googleSearchSuggestParse = (res) => {
+export const googleSearchSuggestParse = (res, searchKeyword) => {
   let text = res
     .replace(new RegExp("window.google.ac.h"), "")
     .replace("(", "")
@@ -6,7 +6,7 @@ export const googleSearchSuggestParse = (res) => {
   const result = JSON.parse(text) || [];
   if (result.length) {
     const list = result[0];
-    return list.map((item) => {
+    const data = list.map((item) => {
       const keyword = item[0];
       return {
         keyword: keyword,
@@ -14,13 +14,22 @@ export const googleSearchSuggestParse = (res) => {
         link: `https://www.google.com/search?q=${keyword}`,
       };
     });
+    // 补充搜索关键词
+    return [
+      {
+        keyword: searchKeyword,
+        icon: null,
+        link: `https://www.google.com/search?q=${searchKeyword}`,
+      },
+      ...data,
+    ];
   }
   return result;
 };
 
-export const baiduSearchSuggestParse = (res) => {
+export const baiduSearchSuggestParse = (res, searchKeyword) => {
   const result = res?.g || [];
-  return result.map((item) => {
+  const data = result.map((item) => {
     const keyword = item.q;
     return {
       keyword: keyword,
@@ -28,31 +37,49 @@ export const baiduSearchSuggestParse = (res) => {
       link: `https://www.baidu.com/s?wd=${keyword}`,
     };
   });
+  // 补充搜索关键词
+  return [
+    {
+      keyword: searchKeyword,
+      icon: null,
+      link: `https://www.baidu.com/s?wd=${searchKeyword}`,
+    },
+    ...data,
+  ];
 };
 
-export const bingSearchSuggestParse = (res) => {
+export const bingSearchSuggestParse = (res, searchKeyword) => {
   const result = res?.s || [];
-  return result.map((item) => {
+  const data = result.map((item) => {
     const keyword = item.q.replaceAll("", "").replaceAll("", "");
     return {
       keyword: keyword,
       icon: null,
-      link: `https://cn.bing.com${item.u}`,
+      link: `https://cn.bing.com?q=${encodeURIComponent(item.u)}`,
     };
   });
+  // 补充搜索关键词
+  return [
+    {
+      keyword: searchKeyword,
+      icon: null,
+      link: `https://cn.bing.com?q=${encodeURIComponent(searchKeyword)}`,
+    },
+    ...data,
+  ];
 };
 
-export const searchSuggestParse = (type, result) => {
+export const searchSuggestParse = (type, result, keyword) => {
   let data = [];
   switch (type) {
     case "Google":
-      data = googleSearchSuggestParse(result);
+      data = googleSearchSuggestParse(result, keyword);
       break;
     case "Baidu":
-      data = baiduSearchSuggestParse(result);
+      data = baiduSearchSuggestParse(result, keyword);
       break;
     case "Bing":
-      data = bingSearchSuggestParse(result);
+      data = bingSearchSuggestParse(result, keyword);
       break;
   }
 

@@ -4,7 +4,7 @@ import {
   CloseOutlined,
   CheckCircleFilled,
 } from "@ant-design/icons";
-import { FloatButton, Drawer, Form, Segmented } from "antd";
+import { FloatButton, Drawer, Form, Segmented ,Button} from "antd";
 
 import { useStore } from "@/hooks";
 import { THEME_BG_LIST } from "@/constants";
@@ -72,6 +72,7 @@ const Setting = () => {
                 </div>
               );
             })}
+            {/* <Button type="primary"> 自定义背景</Button> */}
           </div>
         </Form.Item>
       </Drawer>

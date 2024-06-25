@@ -92,8 +92,10 @@
     overflow: hidden;
     font-size: 18px;
     color: #000;
+    padding: 0 6px;
+    border-radius: 4px;
 
-    img {
+    & > img {
       width: 20px;
       height: 20px;
       border-radius: 50%;
@@ -101,8 +103,15 @@
       object-fit: cover;
     }
 
-    span {
+    & > div {
       margin-left: 6px;
+      width: calc(100% - 45px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+  }
+  .search-suggest-list-item-active {
+    background-color: #f5f5f5;
   }
 }
