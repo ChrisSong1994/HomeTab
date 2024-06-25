@@ -1,9 +1,14 @@
-import React, { useRef, useState, useLayoutEffect } from "react";
+import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { Dropdown, Popover } from "antd";
-import { CaretRightOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  CaretRightOutlined,
+  SearchOutlined,
+  EnterOutlined,
+} from "@ant-design/icons";
 
 import { searchSuggestParse } from "@/utils/search";
 import { useStore } from "@/hooks";
+import SuggestList from "./SuggestList";
 import GOOGLE_ICON from "@/assets/images/google_icon.png";
 import BAIDU_ICON from "@/assets/images/baidu_icon.png";
 import BING_ICON from "@/assets/images/bing_icon.png";
@@ -69,7 +74,7 @@ const Search = () => {
   const handleSearch = (event) => {
     if (event.key === "Enter" || event.type === "click") {
       const keyword = encodeURIComponent(inputRef.current.value);
-      const searchUrl = searchEngineInfo.searchUrl.replace(
+      const searchUrl = searchEngineInfo.searchUrl.replaceAll(
         "${keyword}",
         keyword
       );
@@ -78,8 +83,11 @@ const Search = () => {
   };
 
   const handleInputChange = () => {
-    const keyword = encodeURIComponent(inputRef.current.value.trim());
+    const keyword = inputRef.current.value.trim();
+    const queryKeyword = encodeURIComponent(keyword);
+
     if (chrome?.runtime !== undefined && keyword) {
+      console.log('sendMessage')
       chrome.runtime.sendMessage(
         {
           type: "SEARCH_SUGGEST_FETCH",
@@ -88,17 +96,22 @@ const Search = () => {
               suggestUrl: searchEngineInfo.suggestUrl,
               key: searchEngineInfo.key,
             },
-            keyword: keyword,
+            keyword: queryKeyword,
           },
         },
         null,
-        (res) => {
+        (result) => {
           const searchSuggestData = searchSuggestParse(
             searchEngineInfo.key,
-            res
+            result,
+            keyword
           );
           console.log("searchSuggestData", searchSuggestData);
-          setSuggestList(searchSuggestData);
+          if (searchSuggestData.length >= 1) {
+            setSuggestList(searchSuggestData);
+          } else {
+            setSuggestList([]);
+          }
         }
       );
     }
@@ -116,6 +129,9 @@ const Search = () => {
     };
   }, [searchEngineInfo]);
 
+  // 监听快捷键
+  useEffect(() => {}, []);
+
   return (
     <div className={styles["search-wrapper"]}>
       {searchEngineInfo.logo}
@@ -127,25 +143,13 @@ const Search = () => {
         placement="bottom"
         open={isSuggestShow}
         content={
-          <div className={styles["search-suggest-list"]}>
-            {suggestList.map((item, index) => {
-              return (
-                <a
-                  key={`${searchEngineInfo.key}-${index}`}
-                  className={styles["search-suggest-list-item"]}
-                  href={item.link}
-                  target="_self"
-                >
-                  {item.icon ? (
-                    <img src={item.icon} />
-                  ) : (
-                    <SearchOutlined style={{ fontSize: 20 }} />
-                  )}
-                  <span>{item.keyword}</span>
-                </a>
-              );
-            })}
-          </div>
+          <SuggestList
+            data={suggestList}
+            engine={searchEngineInfo.key}
+            onSelect={(v) => {
+              inputRef.current.value = v;
+            }}
+          />
         }
       >
         <div className={styles["search"]}>
