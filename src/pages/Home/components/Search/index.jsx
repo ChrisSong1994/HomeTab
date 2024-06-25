@@ -2,7 +2,7 @@ import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { Dropdown, Popover } from "antd";
 import { CaretRightOutlined, SearchOutlined } from "@ant-design/icons";
 
-import { searchSuggestParse } from "@/utils/search";
+import { searchSuggestParse } from "@/utils";
 import { useStore } from "@/hooks";
 import SuggestList from "./SuggestList";
 import GOOGLE_ICON from "@/assets/images/google_icon.png";
@@ -64,7 +64,7 @@ const Search = () => {
   };
 
   const handleSearchBlur = () => {
-    setSuggestShow(false);
+    setTimeout(() => setSuggestShow(false), 100);
   };
 
   const handleSearch = (event) => {
@@ -109,11 +109,16 @@ const Search = () => {
         }
       );
     }
+    if (!keyword) {
+      setSuggestShow(false);
+    } else {
+      setSuggestShow(true);
+    }
   };
 
   useLayoutEffect(() => {
     if (inputRef.current) {
-      setTimeout(()=>inputRef.current.focus(),100)
+      setTimeout(() => inputRef.current.focus(), 100);
       inputRef.current.addEventListener("keydown", handleSearch);
     }
     handleInputChange();
@@ -122,7 +127,6 @@ const Search = () => {
         inputRef.current.removeEventListener("keydown", handleSearch);
     };
   }, [searchEngineInfo]);
-
 
   return (
     <div className={styles["search-wrapper"]}>

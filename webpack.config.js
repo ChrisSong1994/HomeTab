@@ -77,11 +77,7 @@ module.exports = (_env, options) => {
         },
         {
           test: /\.(svg|png|jpe?g|gif)$/i,
-          use: [
-            {
-              loader: "file-loader",
-            },
-          ],
+          type: "asset/resource",
         },
       ],
     },
@@ -103,7 +99,7 @@ module.exports = (_env, options) => {
         chunks: ["home"],
         filename: "home.html",
         template: "./src/assets/home.html",
-      })
+      }),
     ],
   };
 };

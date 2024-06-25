@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Modal, Form, Input, Dropdown } from "antd";
 import { PlusOutlined, MoreOutlined } from "@ant-design/icons";
 
+import LinkImage from "./LinkImage";
 import { useStore } from "@/hooks";
 import { to, generateId } from "@/utils";
 import styles from "./index.less";
 
-const CHROME_FAVION_PREFIX = "http://www.google.com/s2/favicons?domain="; // chrome 获取 favicon 接口
+const CHROME_FAVION_PREFIX = "http://www.google.com/s2/favicons?sz=64&domain="; // chrome 获取 favicon 接口
 const OPTIONS_MENUS = [
   {
     key: "1",
@@ -87,6 +88,11 @@ const ShortcutkLinks = () => {
     }
   };
 
+  // 排序
+  // const handleSortChange = (newLinks) => {
+  //   setStore({ shortcutLinks: newLinks });
+  // };
+
   return (
     <div className={styles["shortcutlinks"]}>
       {store.shortcutLinks.map((item, index) => {
@@ -99,14 +105,17 @@ const ShortcutkLinks = () => {
               rel="noreferrer"
             />
             <div className={styles["shortcutlinks-item-icon"]}>
-              <img src={item.icon} alt={item.title} />
+              <LinkImage link={item} />
             </div>
             <div className={styles["shortcutlinks-item-title"]}>
               <span>{item.title}</span>
             </div>
             <div className={styles["shortcutlinks-item-option"]}>
               <Dropdown
-                menu={{ items: OPTIONS_MENUS, onClick: handleMenuClick(item) }}
+                menu={{
+                  items: OPTIONS_MENUS,
+                  onClick: handleMenuClick(item),
+                }}
                 placement="bottomRight"
               >
                 <MoreOutlined />
@@ -115,17 +124,19 @@ const ShortcutkLinks = () => {
           </div>
         );
       })}
+
       <div
         className={styles["shortcutlinks-item"]}
         onClick={() => setIsModalOpen(true)}
       >
         <div className={styles["shortcutlinks-item-icon"]}>
-          <PlusOutlined />
+          <PlusOutlined style={{ fontSize: 18 }} />
         </div>
         <div className={styles["shortcutlinks-item-title"]}>
           <span>添加快捷方式</span>
         </div>
       </div>
+
       <Modal
         title="添加快捷方式"
         open={isModalOpen}

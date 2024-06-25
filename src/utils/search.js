@@ -11,18 +11,24 @@ export const googleSearchSuggestParse = (res, searchKeyword) => {
       return {
         keyword: keyword,
         icon: item?.[3]?.zs,
-        link: `https://www.google.com/search?q=${keyword}`,
+        link: `https://www.google.com/search?q=${encodeURIComponent(keyword)}`,
       };
     });
     // 补充搜索关键词
-    return [
-      {
-        keyword: searchKeyword,
-        icon: null,
-        link: `https://www.google.com/search?q=${searchKeyword}`,
-      },
-      ...data,
-    ];
+    if (data.length && data[0].keyword !== searchKeyword) {
+      return [
+        {
+          keyword: searchKeyword,
+          icon: null,
+          link: `https://www.google.com/search?q=${encodeURIComponent(
+            searchKeyword
+          )}`,
+        },
+        ...data,
+      ];
+    } else {
+      return data;
+    }
   }
   return result;
 };
@@ -34,18 +40,22 @@ export const baiduSearchSuggestParse = (res, searchKeyword) => {
     return {
       keyword: keyword,
       icon: null,
-      link: `https://www.baidu.com/s?wd=${keyword}`,
+      link: `https://www.baidu.com/s?wd=${encodeURIComponent(keyword)}`,
     };
   });
   // 补充搜索关键词
-  return [
-    {
-      keyword: searchKeyword,
-      icon: null,
-      link: `https://www.baidu.com/s?wd=${searchKeyword}`,
-    },
-    ...data,
-  ];
+  if (data.length && data[0].keyword !== searchKeyword) {
+    return [
+      {
+        keyword: searchKeyword,
+        icon: null,
+        link: `https://www.baidu.com/s?wd=${encodeURIComponent(searchKeyword)}`,
+      },
+      ...data,
+    ];
+  } else {
+    return data;
+  }
 };
 
 export const bingSearchSuggestParse = (res, searchKeyword) => {
@@ -55,18 +65,24 @@ export const bingSearchSuggestParse = (res, searchKeyword) => {
     return {
       keyword: keyword,
       icon: null,
-      link: `https://cn.bing.com?q=${encodeURIComponent(item.u)}`,
+      link: `https://cn.bing.com${item.u}`,
     };
   });
   // 补充搜索关键词
-  return [
-    {
-      keyword: searchKeyword,
-      icon: null,
-      link: `https://cn.bing.com?q=${encodeURIComponent(searchKeyword)}`,
-    },
-    ...data,
-  ];
+  if (data.length && data[0].keyword !== searchKeyword) {
+    return [
+      {
+        keyword: searchKeyword,
+        icon: null,
+        link: `https://cn.bing.com/search?q=${encodeURIComponent(
+          searchKeyword
+        )}`,
+      },
+      ...data,
+    ];
+  } else {
+    return data;
+  }
 };
 
 export const searchSuggestParse = (type, result, keyword) => {
