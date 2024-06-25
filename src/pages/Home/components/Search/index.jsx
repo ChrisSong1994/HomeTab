@@ -109,11 +109,16 @@ const Search = () => {
         }
       );
     }
+    if (!keyword) {
+      setSuggestShow(false);
+    } else {
+      setSuggestShow(true);
+    }
   };
 
   useLayoutEffect(() => {
     if (inputRef.current) {
-      setTimeout(()=>inputRef.current.focus(),100)
+      setTimeout(() => inputRef.current.focus(), 100);
       inputRef.current.addEventListener("keydown", handleSearch);
     }
     handleInputChange();
@@ -122,7 +127,6 @@ const Search = () => {
         inputRef.current.removeEventListener("keydown", handleSearch);
     };
   }, [searchEngineInfo]);
-
 
   return (
     <div className={styles["search-wrapper"]}>
