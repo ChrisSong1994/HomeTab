@@ -15,7 +15,7 @@ export const googleSearchSuggestParse = (res, searchKeyword) => {
       };
     });
     // 补充搜索关键词
-    if (data[0].keyword !== searchKeyword) {
+    if (data.length && data[0].keyword !== searchKeyword) {
       return [
         {
           keyword: searchKeyword,
@@ -44,7 +44,7 @@ export const baiduSearchSuggestParse = (res, searchKeyword) => {
     };
   });
   // 补充搜索关键词
-  if (data[0].keyword !== searchKeyword) {
+  if (data.length && data[0].keyword !== searchKeyword) {
     return [
       {
         keyword: searchKeyword,
@@ -62,20 +62,22 @@ export const bingSearchSuggestParse = (res, searchKeyword) => {
   const result = res?.s || [];
   const data = result.map((item) => {
     const keyword = item.q.replaceAll("", "").replaceAll("", "");
-    console.log();
+    console.log(item);
     return {
       keyword: keyword,
       icon: null,
-      link: `https://cn.bing.com?q=${encodeURIComponent(item.u)}`,
+      link: `https://cn.bing.com${item.u}`,
     };
   });
   // 补充搜索关键词
-  if (data[0].keyword !== searchKeyword) {
+  if (data.length && data[0].keyword !== searchKeyword) {
     return [
       {
         keyword: searchKeyword,
         icon: null,
-        link: `https://cn.bing.com?q=${encodeURIComponent(searchKeyword)}`,
+        link: `https://cn.bing.com/search?q=${encodeURIComponent(
+          searchKeyword
+        )}`,
       },
       ...data,
     ];
