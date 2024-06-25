@@ -6,7 +6,7 @@ import { useStore } from "@/hooks";
 import { to, generateId } from "@/utils";
 import styles from "./index.less";
 
-const CHROME_FAVION_PREFIX = "http://www.google.com/s2/favicons?domain="; // chrome 获取 favicon 接口
+const CHROME_FAVION_PREFIX = "http://www.google.com/s2/favicons?sz=64&domain="; // chrome 获取 favicon 接口
 const OPTIONS_MENUS = [
   {
     key: "1",
