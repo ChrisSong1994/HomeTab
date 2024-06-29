@@ -1,4 +1,4 @@
-import React, { useRef, useState, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Dropdown, Popover } from "antd";
 import { CaretRightOutlined, SearchOutlined } from "@ant-design/icons";
 
@@ -12,6 +12,10 @@ import GOOGLE_LOGO from "@/assets/images/google_logo.png";
 import BAIDU_LOGO from "@/assets/images/baidu_logo.png";
 import BING_LOGO from "@/assets/images/bing_logo.png";
 import styles from "./index.less";
+
+const isAppleDevice = /(mac|iphone|ipod|ipad)/i.test(
+  typeof navigator !== "undefined" ? navigator?.platform : ""
+);
 
 export const SEARCH_ENGINES = [
   {
@@ -47,8 +51,10 @@ export const SEARCH_ENGINES = [
 const Search = () => {
   const inputRef = useRef(null);
   const [store, setStore] = useStore();
+  const [isFocus, setIsFocus] = useState(false);
   const [suggestList, setSuggestList] = useState([]);
   const [suggestShow, setSuggestShow] = useState(false);
+  const [symbol, setSymbol] = useState("⌘");
   const isSuggestShow = suggestList.length && suggestShow;
 
   const searchEngineInfo = SEARCH_ENGINES.find(
@@ -61,10 +67,13 @@ const Search = () => {
 
   const handleSearchFocus = () => {
     setSuggestShow(true);
+    setIsFocus(true);
   };
 
   const handleSearchBlur = () => {
+    // 为了延迟 popover 消失，导致获取不到点击事件的情况
     setTimeout(() => setSuggestShow(false), 100);
+    setIsFocus(false);
   };
 
   const handleSearch = (event) => {
@@ -75,6 +84,19 @@ const Search = () => {
         keyword
       );
       window.open(searchUrl);
+    }
+  };
+
+  // 快捷键
+  const handlerShortcut = (event) => {
+    if (
+      ((isAppleDevice ? event.metaKey : event.ctrlKey) && event.key === "k") ||
+      (event.key === "/" && !isInput(event.target))
+    ) {
+      event.preventDefault();
+      setTimeout(() => {
+        inputRef.current?.focus();
+      });
     }
   };
 
@@ -116,15 +138,20 @@ const Search = () => {
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    if (!isAppleDevice) {
+      setSymbol("Ctrl");
+    }
     if (inputRef.current) {
-      setTimeout(() => inputRef.current.focus(), 100);
       inputRef.current.addEventListener("keydown", handleSearch);
+      document.addEventListener("keydown", handlerShortcut);
     }
     handleInputChange();
+
     return () => {
       inputRef.current &&
         inputRef.current.removeEventListener("keydown", handleSearch);
+      document.removeEventListener("keydown", handlerShortcut);
     };
   }, [searchEngineInfo]);
 
@@ -178,6 +205,9 @@ const Search = () => {
             onBlur={handleSearchBlur}
             onChange={handleInputChange}
           />
+          {isFocus ? null : (
+            <span className={styles["search-shortcut"]}>{symbol} K</span>
+          )}
           <div className={styles["search-btn"]} onClick={handleSearch}>
             <SearchOutlined />
           </div>
