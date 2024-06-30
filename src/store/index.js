@@ -9,6 +9,8 @@ export const DEFAULT_STORE = {
   searchEngine: "Google",
   // 背景图片配置
   backgroundUrl: THEME_BG_LIST[0].url,
+  // 自定义背景图
+  customBackgroundUrls:[],
   // 快捷链接配置
   shortcutLinks: [
     {
@@ -57,6 +59,10 @@ class Store {
           this.subscribe(this.getData());
         }
       });
+
+      // chrome.bookmarks.getSubTree('1', (res) => {
+      //   console.log("bookmarks", res);
+      // });
     }
   }
 

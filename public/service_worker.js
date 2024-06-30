@@ -1,7 +1,5 @@
 chrome.runtime.onMessage.addListener(function (data, _option, callback) {
-  debugger
   if (data.type === "SEARCH_SUGGEST_FETCH") {
-    
     handleSearchSuggestFetch(data.payload, callback);
   }
   return true;
